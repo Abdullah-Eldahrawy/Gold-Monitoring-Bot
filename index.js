@@ -48,7 +48,19 @@ async function monitor() {
       },
     };
 
-    // Replace with your actual API
+    const requestBodyForHalfCoin = {
+      id: 0,
+      jsonrpc: "2.0",
+      method: "call",
+      params: {
+        product_template_id: 329,
+        product_id: 1200,
+        combination: [],
+        add_qty: 1,
+        parent_combination: [],
+      },
+    };
+
     const oneCoin = await axios.post(
       "https://shop.btcegyptgold.com/website_sale/get_combination_info",
       requestBodyForOneCoin,
@@ -59,24 +71,38 @@ async function monitor() {
       }
     );
 
-    const data = oneCoin.data.result;
+    const halfCoin = await axios.post(
+      "https://shop.btcegyptgold.com/website_sale/get_combination_info",
+      requestBodyForHalfCoin,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const OneCoindata = oneCoin.data.result;
     const currentData = {
-      product_id: data.product_id,
-      product_template_id: data.product_template_id,
-      display_name: data.display_name,
-      price: data.price,
+      oneCoin: {
+        product_id: OneCoindata.product_id,
+        product_template_id: OneCoindata.product_template_id,
+        display_name: OneCoindata.display_name,
+        price: OneCoindata.price,
+      },
     };
     const lastData = loadLastData();
-    priceDff = Math.abs(currentData.price - lastData?.price) || 0;
+    priceDff = Math.abs(currentData.oneCoin.price - lastData?.oneCoin?.price) || 0;
 
     // Define change logic: here, we detect change in `completed`
     if (!lastData || priceDff > 100) {
-      console.log("Significant change detected")  
-      const isIncreased = currentData.price > (lastData?.price || 0);
+      console.log("Significant change detected");
+      const isIncreased = currentData.oneCoin.price > (lastData?.oneCoin?.price || 0);
       await sendWhatsApp(
-        `1 Gold Coin BTC Price changed from ${Math.trunc(lastData?.price || 0)} to ${
-          Math.trunc(currentData.price)
-        } ${isIncreased ? "📈⬆️" : "📉⬇️"}.`
+        `1 Gold Coin BTC Price changed from ${Math.trunc(
+          lastData?.oneCoin?.price || 0
+        )} to ${Math.trunc(currentData.oneCoin.price)} ${
+          isIncreased ? "📈⬆️" : "📉⬇️"
+        }.`
       );
       saveData(currentData);
     } else {
