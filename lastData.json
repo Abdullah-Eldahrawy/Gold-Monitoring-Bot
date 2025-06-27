@@ -6,8 +6,8 @@
   "is_combination_possible": true,
   "parent_exclusions": {},
   "price_extra": 0,
-  "price": 37874.4,
-  "list_price": 37874.4,
+  "price": 37750.4,
+  "list_price": 37750.4,
   "has_discounted_price": false,
   "compare_list_price": 0,
   "prevent_zero_price_sale": false,
@@ -30,7 +30,7 @@
     "item_name": "[EGX21PXTLSPXXX8] 8gm (Coptic, الخروف الضال)",
     "item_category": "Coins",
     "currency": "EGP",
-    "price": 37874.4
+    "price": 37750.4
   },
-  "carousel": "\n        <div id=\"o-carousel-product\" class=\"carousel slide position-sticky mb-3 overflow-hidden\" data-bs-ride=\"carousel\" data-bs-interval=\"0\" data-name=\"Product Carousel\">\n            <div class=\"o_carousel_product_outer carousel-outer position-relative flex-grow-1 overflow-hidden\">\n                <div class=\"carousel-inner h-100\">\n                        <div class=\"carousel-item h-100 text-center active\">\n        <div class=\"position-relative d-inline-flex overflow-hidden m-auto h-100\">\n            <span class=\"o_ribbon  z-index-1\" style=\"\"></span>\n            <div class=\"d-flex align-items-start justify-content-center h-100 oe_unmovable\"><img src=\"/web/image/product.product/1410/image_1024/%5BEGX21PXTLSPXXX8%5D%208gm%20%28Coptic%2C%20%D8%A7%D9%84%D8%AE%D8%B1%D9%88%D9%81%20%D8%A7%D9%84%D8%B6%D8%A7%D9%84%29?unique=e39d816\" class=\"img img-fluid oe_unmovable product_detail_img mh-100\" alt=\"8gm\" loading=\"lazy\"/></div>\n        </div>\n                        </div>\n                </div>\n            </div>\n        <div class=\"o_carousel_product_indicators pt-2 overflow-hidden\">\n        </div>\n        </div>"
+  "carousel": "\n        <div id=\"o-carousel-product\" class=\"carousel slide position-sticky mb-3 overflow-hidden\" data-bs-ride=\"carousel\" data-bs-interval=\"0\" data-name=\"Product Carousel\">\n            <div class=\"o_carousel_product_outer carousel-outer position-relative flex-grow-1 overflow-hidden\">\n                <div class=\"carousel-inner h-100\">\n                        <div class=\"carousel-item h-100 text-center active\">\n        <div class=\"position-relative d-inline-flex overflow-hidden m-auto h-100\">\n            <span class=\"o_ribbon  z-index-1\" style=\"\"></span>\n            <div class=\"d-flex align-items-start justify-content-center h-100 oe_unmovable\"><img src=\"/web/image/product.product/1410/image_1024/%5BEGX21PXTLSPXXX8%5D%208gm%20%28Coptic%2C%20%D8%A7%D9%84%D8%AE%D8%B1%D9%88%D9%81%20%D8%A7%D9%84%D8%B6%D8%A7%D9%84%29?unique=dcb03e2\" class=\"img img-fluid oe_unmovable product_detail_img mh-100\" alt=\"8gm\" loading=\"lazy\"/></div>\n        </div>\n                        </div>\n                </div>\n            </div>\n        <div class=\"o_carousel_product_indicators pt-2 overflow-hidden\">\n        </div>\n        </div>"
 }
