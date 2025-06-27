@@ -66,10 +66,11 @@ async function monitor() {
     // Define change logic: here, we detect change in `completed`
     if (!lastData || priceDff > 100) {
       console.log("Significant change detected")  
+      const isIncreased = currentData.price > (lastData?.price || 0);
       await sendWhatsApp(
-        `1 Gold Coin BTC Price changed from ${currentData.price} to ${
-          lastData?.price || "N/A"
-        }.`
+        `1 Gold Coin BTC Price changed from ${Math.trunc(lastData?.price || 0)} to ${
+          Math.trunc(currentData.price)
+        } ${isIncreased ? "📈⬆️" : "📉⬇️"}.`
       );
       saveData(currentData);
     } else {
