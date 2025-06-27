@@ -49,9 +49,6 @@ bower_components/
 dist/
 build/
 
-# Local data
-lastData.json
-
 # Package lock files
 package-lock.json
 yarn.lock
