@@ -35,7 +35,7 @@ async function monitor() {
   try {
     console.log("Checking data...");
 
-    const requestBody = {
+    const requestBodyForOneCoin = {
       id: 0,
       jsonrpc: "2.0",
       method: "call",
@@ -49,9 +49,9 @@ async function monitor() {
     };
 
     // Replace with your actual API
-    const res = await axios.post(
+    const oneCoin = await axios.post(
       "https://shop.btcegyptgold.com/website_sale/get_combination_info",
-      requestBody,
+      requestBodyForOneCoin,
       {
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,13 @@ async function monitor() {
       }
     );
 
-    const currentData = res.data.result;
+    const data = oneCoin.data.result;
+    const currentData = {
+      product_id: data.product_id,
+      product_template_id: data.product_template_id,
+      display_name: data.display_name,
+      price: data.price,
+    };
     const lastData = loadLastData();
     priceDff = Math.abs(currentData.price - lastData?.price) || 0;
 
