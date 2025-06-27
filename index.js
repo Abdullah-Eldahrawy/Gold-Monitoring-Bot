@@ -1,6 +1,5 @@
 const fs = require("fs");
 const axios = require("axios");
-const cron = require("node-cron");
 
 const DATA_FILE = "./lastData.json";
 const PHONE = process.env.PHONE_NUMBER; // Replace with your WhatsApp number
@@ -81,6 +80,4 @@ async function monitor() {
   }
 }
 
-// Step 5: Schedule job to run every 5 minutes
-cron.schedule("*/5 * * * *", monitor);
-console.log("Cron job scheduled to run every 5 minutes.");
+monitor();
