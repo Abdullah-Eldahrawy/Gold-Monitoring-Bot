@@ -3,8 +3,8 @@ const axios = require("axios");
 const cron = require("node-cron");
 
 const DATA_FILE = "./lastData.json";
-const PHONE = "201002601277"; // Replace with your WhatsApp number
-const API_KEY = "5264175"; // From CallMeBot
+const PHONE = process.env.PHONE_NUMBER; // Replace with your WhatsApp number
+const API_KEY = process.env.API_KEY; // From CallMeBot
 
 // Step 1: Load old data
 function loadLastData() {
