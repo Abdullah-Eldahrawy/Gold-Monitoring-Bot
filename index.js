@@ -89,6 +89,12 @@ async function monitor() {
         display_name: OneCoindata.display_name,
         price: OneCoindata.price,
       },
+      halfCoin: {
+        product_id: halfCoin.data.result.product_id,
+        product_template_id: halfCoin.data.result.product_template_id,
+        display_name: halfCoin.data.result.display_name,
+        price: halfCoin.data.result.price,
+      },
     };
     const lastData = loadLastData();
     priceDff = Math.abs(currentData.oneCoin.price - lastData?.oneCoin?.price) || 0;
