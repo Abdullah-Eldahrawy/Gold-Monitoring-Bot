@@ -1,5 +1,6 @@
 const fs = require("fs");
 const axios = require("axios");
+const cheerio = require("cheerio");
 
 const DATA_FILE = "./lastData.json";
 const PHONE = process.env.PHONE_NUMBER; // Replace with your WhatsApp number
@@ -116,6 +117,25 @@ async function monitor() {
     }
   } catch (error) {
     console.error("Error fetching or processing data:", error.message);
+  }
+}
+
+async function scrapeFromElsagha() {
+  try {
+    const res = await axios.get("https://market.isagha.com/prices");
+
+    const $ = cheerio.load(res.data);
+
+    // Only select tbody > tr inside the table with class `md-prices leading-normal`
+    const rows = $("table.md-prices.leading-normal tbody tr");
+    const price = Number(
+      rows.find(".header-price-item").eq(0).text().trim().split(" ")[0]
+    );
+    if (price) {
+      console.log(`${price}`);
+    }
+  } catch (err) {
+    console.error("Error fetching or parsing data:", err.message);
   }
 }
 
