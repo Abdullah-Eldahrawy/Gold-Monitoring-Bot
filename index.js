@@ -6,6 +6,10 @@ const DATA_FILE = "./lastData.json";
 const PHONE = process.env.PHONE_NUMBER; // Replace with your WhatsApp number
 const API_KEY = process.env.API_KEY; // From CallMeBot
 
+const ONE_GOLD_COIN_WIEGHT = 8;
+const HALF_GOLD_COIN_WIEGHT = 4;
+const QUARTER_GOLD_COIN_WIEGHT = 2;
+
 // Step 1: Load old data
 function loadLastData() {
   if (!fs.existsSync(DATA_FILE)) return null;
@@ -36,74 +40,31 @@ async function monitor() {
   try {
     console.log("Checking data...");
 
-    const requestBodyForOneCoin = {
-      id: 0,
-      jsonrpc: "2.0",
-      method: "call",
-      params: {
-        product_template_id: 340,
-        product_id: 1410,
-        combination: [],
-        add_qty: 1,
-        parent_combination: [],
-      },
-    };
+    const goldPricePerGram = await scrapeFromElsagha();
 
-    const requestBodyForHalfCoin = {
-      id: 0,
-      jsonrpc: "2.0",
-      method: "call",
-      params: {
-        product_template_id: 329,
-        product_id: 1200,
-        combination: [],
-        add_qty: 1,
-        parent_combination: [],
-      },
-    };
-
-    const oneCoin = await axios.post(
-      "https://shop.btcegyptgold.com/website_sale/get_combination_info",
-      requestBodyForOneCoin,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const halfCoin = await axios.post(
-      "https://shop.btcegyptgold.com/website_sale/get_combination_info",
-      requestBodyForHalfCoin,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const OneCoindata = oneCoin.data.result;
     const currentData = {
       oneCoin: {
-        product_id: OneCoindata.product_id,
-        product_template_id: OneCoindata.product_template_id,
-        display_name: OneCoindata.display_name,
-        price: OneCoindata.price,
+        display_name: "8g Coin",
+        price: goldPricePerGram * ONE_GOLD_COIN_WIEGHT,
       },
       halfCoin: {
-        product_id: halfCoin.data.result.product_id,
-        product_template_id: halfCoin.data.result.product_template_id,
-        display_name: halfCoin.data.result.display_name,
-        price: halfCoin.data.result.price,
+        display_name: "4g Coin",
+        price: goldPricePerGram * HALF_GOLD_COIN_WIEGHT,
+      },
+      quarterCoin: {
+        display_name: "2g Coin",
+        price: goldPricePerGram * QUARTER_GOLD_COIN_WIEGHT,
       },
     };
     const lastData = loadLastData();
-    priceDff = Math.abs(currentData.oneCoin.price - lastData?.oneCoin?.price) || 0;
+    priceDff =
+      Math.abs(currentData.oneCoin.price - lastData?.oneCoin?.price) || 0;
 
     // Define change logic: here, we detect change in `completed`
     if (!lastData || priceDff > 100) {
       console.log("Significant change detected");
-      const isIncreased = currentData.oneCoin.price > (lastData?.oneCoin?.price || 0);
+      const isIncreased =
+        currentData.oneCoin.price > (lastData?.oneCoin?.price || 0);
       await sendWhatsApp(
         `1 Gold Coin BTC Price changed from ${Math.trunc(
           lastData?.oneCoin?.price || 0
@@ -129,11 +90,9 @@ async function scrapeFromElsagha() {
     // Only select tbody > tr inside the table with class `md-prices leading-normal`
     const rows = $("table.md-prices.leading-normal tbody tr");
     const price = Number(
-      rows.find(".header-price-item").eq(0).text().trim().split(" ")[0]
+      rows.find(".header-price-item").eq(0).text().trim().split(" ")[0] || 0
     );
-    if (price) {
-      console.log(`${price}`);
-    }
+    return price;
   } catch (err) {
     console.error("Error fetching or parsing data:", err.message);
   }
