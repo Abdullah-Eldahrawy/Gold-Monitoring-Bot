@@ -1,14 +1,14 @@
 {
   "oneCoin": {
-    "product_id": 1410,
-    "product_template_id": 340,
-    "display_name": "[EGX21PXTLSPXXX8] 8gm (Coptic, الخروف الضال)",
-    "price": 37743.200000000004
+    "display_name": "8g Coin",
+    "price": 37040
   },
   "halfCoin": {
-    "product_id": 1200,
-    "product_template_id": 329,
-    "display_name": "[EGX21PXTLSPXXX4] 4gm (Coptic, الخروف الضال)",
-    "price": 18891.600000000002
+    "display_name": "4g Coin",
+    "price": 18520
+  },
+  "quarterCoin": {
+    "display_name": "2g Coin",
+    "price": 9260
   }
 }
