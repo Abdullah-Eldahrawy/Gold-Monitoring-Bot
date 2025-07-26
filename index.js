@@ -59,6 +59,7 @@ async function monitor() {
     };
     const lastData = loadLastData();
     priceDff = Math.abs(currentData.oneCoin.price - lastData?.oneCoin?.price) || 0;
+    console.log("Price difference:", priceDff);
 
     // Define change logic: here, we detect change in `completed`
     if (!lastData || priceDff > 100) {
