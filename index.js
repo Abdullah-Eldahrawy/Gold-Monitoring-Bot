@@ -3,8 +3,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 const DATA_FILE = "./lastData.json";
-const PHONE = process.env.PHONE_NUMBER; // Replace with your WhatsApp number
-const API_KEY = process.env.API_KEY; // From CallMeBot
+const PHONE = process.env.PHONE_NUMBER;
+const API_KEY = process.env.API_KEY;
 
 const ONE_GOLD_COIN_WIEGHT = 8;
 const HALF_GOLD_COIN_WIEGHT = 4;
@@ -41,6 +41,7 @@ async function monitor() {
     console.log("Checking data...");
 
     const goldPricePerGram = await scrapeFromElsagha();
+    console.log("Gold price per gram:", goldPricePerGram);
 
     const currentData = {
       oneCoin: {
@@ -57,14 +58,12 @@ async function monitor() {
       },
     };
     const lastData = loadLastData();
-    priceDff =
-      Math.abs(currentData.oneCoin.price - lastData?.oneCoin?.price) || 0;
+    priceDff = Math.abs(currentData.oneCoin.price - lastData?.oneCoin?.price) || 0;
 
     // Define change logic: here, we detect change in `completed`
     if (!lastData || priceDff > 100) {
       console.log("Significant change detected");
-      const isIncreased =
-        currentData.oneCoin.price > (lastData?.oneCoin?.price || 0);
+      const isIncreased = currentData.oneCoin.price > (lastData?.oneCoin?.price || 0);
       await sendWhatsApp(
         `1 Gold Coin BTC Price changed from ${Math.trunc(
           lastData?.oneCoin?.price || 0
