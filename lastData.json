@@ -1,14 +1,14 @@
 {
   "oneCoin": {
     "display_name": "8g Coin",
-    "price": 47040
+    "price": 47200
   },
   "halfCoin": {
     "display_name": "4g Coin",
-    "price": 23520
+    "price": 23600
   },
   "quarterCoin": {
     "display_name": "2g Coin",
-    "price": 11760
+    "price": 11800
   }
 }
